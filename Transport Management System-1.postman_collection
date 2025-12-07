@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "102a38a6-93e7-434a-97cc-6baf00077359",
+		"name": "Transport Management System Copy 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29299813"
+	},
+	"item": [
+		{
+			"name": "Load APIs",
+			"item": [
+				{
+					"name": "Create Load",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"shipperId\": \"bob_the_builder\",\n  \"loadingCity\": \"Pune\",\n  \"unloadingCity\": \"Delhi\",\n  \"loadingDate\": \"2025-12-10T10:00:00Z\",\n  \"productType\": \"Construction Materials\",\n  \"weight\": 1000.0,\n  \"weightUnit\": \"KG\",\n  \"truckType\": \"Flatbed\",\n  \"noOfTrucks\": 5\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/load",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"load"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Loads",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/load?shipperId=bob_the_builder&status=POSTED&page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"load"
+							],
+							"query": [
+								{
+									"key": "shipperId",
+									"value": "bob_the_builder"
+								},
+								{
+									"key": "status",
+									"value": "POSTED"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Load",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/load/{{loadId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"load",
+								"{{loadId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Load",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/load/{{loadId}}/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"load",
+								"{{loadId}}",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Best Bids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/load/{{loadId}}/best-bids",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"load",
+								"{{loadId}}",
+								"best-bids"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transporter APIs",
+			"item": [
+				{
+					"name": "Register Transporter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"companyName\": \"Noddy\",\n  \"rating\": 4.5,\n  \"availableTrucks\": [\n    {\"truckType\": \"Flatbed\", \"count\": 10},\n    {\"truckType\": \"Box Truck\", \"count\": 5}\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transporter",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transporter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transporter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/transporter/{{transporterId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transporter",
+								"{{transporterId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Available Trucks",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"availableTrucks\": [\n    {\"truckType\": \"Flatbed\", \"count\": 8},\n    {\"truckType\": \"Box Truck\", \"count\": 7}\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transporter/{{transporterId}}/trucks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transporter",
+								"{{transporterId}}",
+								"trucks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bid APIs",
+			"item": [
+				{
+					"name": "Submit Bid",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"loadId\": \"{loadId}\",\n  \"transporterId\": \"{transporterId}\",\n  \"proposedRate\": 1500.0,\n  \"trucksOffered\": 3\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Bids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bid?loadId={{loadId}}&transporterId={{transporterId}}&status=PENDING",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bid"
+							],
+							"query": [
+								{
+									"key": "loadId",
+									"value": "{{loadId}}"
+								},
+								{
+									"key": "transporterId",
+									"value": "{{transporterId}}"
+								},
+								{
+									"key": "status",
+									"value": "PENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bid/{{bidId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bid",
+								"{{bidId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Bid",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bid/{{bidId}}/reject",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bid",
+								"{{bidId}}",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking APIs",
+			"item": [
+				{
+					"name": "Accept Bid & Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/booking?bidId={{bidId}}&allocateTrucks=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "bidId",
+									"value": "{{bidId}}"
+								},
+								{
+									"key": "allocateTrucks",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/booking/{{bookingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/booking/{{bookingId}}/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingId}}",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		}
+	]
+}
