@@ -8,6 +8,13 @@ Quick summary
 - Key business rules implemented: capacity validation, load status transitions, multi-truck allocation, optimistic-lock concurrency protection (first-wins), best-bid calculation
 
 ---
+## Database Schema Diagram
+![TMS Database Schema](Database_Schema_Diagram.jpeg)
+
+## API Documentation
+Download and import Postman collection here:  
+[Transport Management System Postman Collection](Transport%20Management%20System-1.postman_collection)
+
 
 ## Project Structure & Key Classes
 
